@@ -378,10 +378,10 @@ $ curl -s -X POST http://localhost:8001/plugins \
   -d name=oidc \
   -d config.client_id=kong \
   -d config.client_secret=${CLIENT_SECRET} \
-  -d config.bearer_only=yes \
-  -d config.realm=kong \
+  -d config.bearer_only=no \
+  -d config.realm=experimental \
   -d config.introspection_endpoint=http://${HOST_IP}:8180/auth/realms/experimental/protocol/openid-connect/token/introspect \
-  -d config.discovery=http://${HOST_IP}:8180/auth/realms/master/.well-known/openid-configuration \
+  -d config.discovery=http://${HOST_IP}:8180/auth/realms/experimental/.well-known/openid-configuration \
   | python -mjson.tool
 ```
 
