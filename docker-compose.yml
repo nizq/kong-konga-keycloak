@@ -15,8 +15,6 @@ services:
       - kong-datastore:/var/lib/postgresql/data
     networks:
       - kong-net
-    ports:
-      - "15432:5432"
     environment:
       POSTGRES_DB:       api-gw
       POSTGRES_USER:     kong
@@ -30,9 +28,9 @@ services:
       - kong-net
     ports:
       - "8000:8000" # Listener
-      - "8001:8001" # Admin API
+      - "127.0.0.1:8001:8001" # Admin API
       - "8443:8443" # Listener  (SSL)
-      - "8444:8444" # Admin API (SSL)
+      - "127.0.0.1:8444:8444" # Admin API (SSL)
     environment:
       KONG_DATABASE:         postgres
       KONG_PG_HOST:          kong-db
@@ -69,8 +67,6 @@ services:
       - keycloak-datastore:/var/lib/postresql/data
     networks:
       - keycloak-net
-    ports:
-      - "25432:5432"
     environment:
       POSTGRES_DB:       keycloak
       POSTGRES_USER:     keycloak
@@ -83,7 +79,7 @@ services:
     networks:
       - keycloak-net
     ports:
-      - "8180:8080"
+      - "8080:8080"
     environment:
       DB_VENDOR:   POSTGRES
       DB_ADDR:     keycloak-db
